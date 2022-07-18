@@ -1,0 +1,19 @@
+site_name: SMSjet Documentation
+theme:
+  name: material
+  features:
+    - navigation.sections
+  logo: https://f004.backblazeb2.com/file/smsjet/Subtractplane_light.png
+  favicon: https://f004.backblazeb2.com/file/smsjet/Subtractplane_dark-2+copy.png
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+extra_css:
+  - stylesheets/extra.css
