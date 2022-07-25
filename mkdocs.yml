@@ -17,3 +17,14 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
 extra_css:
   - stylesheets/extra.css
+nav:
+  - Welcome to SMSjet Docs: index.md
+  - User Guide:
+      - user-guide/1. getting-started.md
+      - user-guide/2. api.md
+      - user-guide/3. phone-formatting.md
+      - user-guide/4. 2FA Two Factor Authentication.md
+      - user-guide/5. Contact Groups.md
+      - user-guide/99. Supported-Countries.md
+  - Integrations:
+      - Integrations/1. Zapier.md

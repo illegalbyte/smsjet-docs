@@ -1,0 +1,669 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="https://f004.backblazeb2.com/file/smsjet/Subtractplane_dark-2+copy.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Sending SMS with the API - SMSjet Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sending-sms-with-the-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SMSjet Documentation" class="md-header__button md-logo" aria-label="SMSjet Documentation" data-md-component="logo">
+      
+  <img src="https://f004.backblazeb2.com/file/smsjet/Subtractplane_light.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SMSjet Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sending SMS with the API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SMSjet Documentation" class="md-nav__button md-logo" aria-label="SMSjet Documentation" data-md-component="logo">
+      
+  <img src="https://f004.backblazeb2.com/file/smsjet/Subtractplane_light.png" alt="logo">
+
+    </a>
+    SMSjet Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome to SMSjet Docs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          User guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20getting-started/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Sending SMS with the API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Sending SMS with the API
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-an-api" class="md-nav__link">
+    What is an API?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-you-use-an-api" class="md-nav__link">
+    How do you use an API?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-your-first-sms" class="md-nav__link">
+    Sending your first SMS
+  </a>
+  
+    <nav class="md-nav" aria-label="Sending your first SMS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#send-sms-via-smsjetnetdocs" class="md-nav__link">
+    Send SMS via SMSjet.net/docs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-sms-via-command-line" class="md-nav__link">
+    Send SMS via Command Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-sms-via-python" class="md-nav__link">
+    Send SMS via Python
+  </a>
+  
+    <nav class="md-nav" aria-label="Send SMS via Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-requests-library" class="md-nav__link">
+    Python Requests Library
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-sms-via-javascript" class="md-nav__link">
+    Send SMS via Javascript
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20phone-formatting/" class="md-nav__link">
+        Phone Number Formatting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%202FA%3A%20Two%20Factor%20Authentication/" class="md-nav__link">
+        Two Factor Authentication (2FA)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%20Contact%20Groups/" class="md-nav__link">
+        Contact Groups
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../99.%20Supported-Countries/" class="md-nav__link">
+        Supported Countries
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-an-api" class="md-nav__link">
+    What is an API?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-you-use-an-api" class="md-nav__link">
+    How do you use an API?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-your-first-sms" class="md-nav__link">
+    Sending your first SMS
+  </a>
+  
+    <nav class="md-nav" aria-label="Sending your first SMS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#send-sms-via-smsjetnetdocs" class="md-nav__link">
+    Send SMS via SMSjet.net/docs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-sms-via-command-line" class="md-nav__link">
+    Send SMS via Command Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-sms-via-python" class="md-nav__link">
+    Send SMS via Python
+  </a>
+  
+    <nav class="md-nav" aria-label="Send SMS via Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-requests-library" class="md-nav__link">
+    Python Requests Library
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-sms-via-javascript" class="md-nav__link">
+    Send SMS via Javascript
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="sending-sms-with-the-api">Sending SMS with the API</h1>
+<h2 id="what-is-an-api">What is an API?</h2>
+<ul>
+<li>
+<p>An API is simply a way for one system to communicate with another. Our API for example, lets other computers, websites, or applications to send SMS messages. </p>
+</li>
+<li>
+<p>Using an API is a lot like using a web browser, except you need to send some additional information alongside the URL.</p>
+</li>
+<li>
+<p>Our API is a RESTful API, which means that it uses a standard set of HTTP methods to communicate with other systems. </p>
+</li>
+</ul>
+<h2 id="how-do-you-use-an-api">How do you use an API?</h2>
+<p>To use an API you need to read the documentation, which outlines what the API does, and how to use it. </p>
+<p>Our API documentation can be found here: <a href="https://smsjet.net/docs">https://smsjet.net/docs</a></p>
+<p>The great thing about SMSjet's documentation is that it is <strong>fully interactive</strong> meaning you don't need to download any API testing software to test things out! </p>
+<div class="admonition tip">
+<p class="admonition-title">Advanced API User?</p>
+<p>If you are experienced with using APIs then reading through and interacting with <a href="https://smsjet.net/docs">/docs</a> is a great way to get started. </p>
+</div>
+<h2 id="sending-your-first-sms">Sending your first SMS</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>SMSjet does its best to figure out phone number formatting, but you <strong>must include the country code</strong> before any phone number you want to SMS. See <a href="phone-formatting.md">Phone Number Formatting</a> for more information.</p>
+</div>
+<h3 id="send-sms-via-smsjetnetdocs">Send SMS via SMSjet.net/docs</h3>
+<p>Our documentation is a living and breathing documentation, which means that it is constantly updated with new features and improvements. Below are some getting started tips for sending SMS with Python, Javascript, curl.</p>
+<figure>
+<p><img alt="SMSJet API Key" src="https://f004.backblazeb2.com/file/smsjet/smsjetapikey_shot.png" width="400" />
+  </p>
+<figcaption>Your account page</figcaption>
+</figure>
+<h3 id="send-sms-via-command-line">Send SMS via Command Line</h3>
+<p>cURL is a popular command line utility for interacting with APIs. If you have a Linux, MacOS, or Windows system, you can use the <a href="https://curl.haxx.se/">cURL</a> command to send SMS:</p>
+<div class="highlight"><pre><span></span><code>curl -X <span class="s1">&#39;POST&#39;</span> <span class="se">\</span>
+  <span class="s1">&#39;https://smsjet.net/api/send&#39;</span> <span class="se">\</span>
+  -H <span class="s1">&#39;accept: application/json&#39;</span> <span class="se">\</span>
+  -H <span class="s1">&#39;apikey: testkey&#39;</span> <span class="se">\</span>
+  -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\</span>
+  -d <span class="s1">&#39;{</span>
+<span class="s1">  &quot;message&quot;: &quot;Hello World&quot;,</span>
+<span class="s1">  &quot;phone_number&quot;: &quot;+61412345678&quot;</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
+<p>We also plan to release a commandline tool for sending SMS in the future. <a href="https://smsjet.net/contact">Contact us if you are interested in testing out SMSjet's command line tool</a>.</p>
+<h3 id="send-sms-via-python">Send SMS via Python</h3>
+<p>We're big fans of Python here at SMSjet, so we're in the process of writing a pip module and commandline tool for sending SMS. In the meantime, you can still make use of the <code>requests</code> library.</p>
+<h4 id="python-requests-library">Python Requests Library</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s1">&#39;https://smsjet.net/api/send&#39;</span><span class="p">,</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;apikey&#39;</span><span class="p">:</span> <span class="s1">&#39;yourapikey&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span>
+    <span class="p">},</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+        <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello World&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;phone_number&#39;</span><span class="p">:</span> <span class="s1">&#39;+61412345678&#39;</span>
+    <span class="p">})</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If using requests, make sure you use the right method for the API endpoint you are targetting (eg. <code>requests.post()</code> for <code>/api/send</code> and <code>requests.get()</code> for <code>/api/validate</code>).</p>
+</div>
+<h3 id="send-sms-via-javascript">Send SMS via Javascript</h3>
+<div class="admonition building">
+<p class="admonition-title">Coming Soon...</p>
+<p>We're still building out the Javascript API. In the meantime, you can use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">fetch</a> or <a href="https://api.jquery.com/jquery.ajax/">Jquery AJAX</a> to make POST, GET, UPDATE, DELETE requests to the API.</p>
+</div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../1.%20getting-started/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Getting Started
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../3.%20phone-formatting/" class="md-footer__link md-footer__link--next" aria-label="Next: Phone Number Formatting" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Phone Number Formatting
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>
